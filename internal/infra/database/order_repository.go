@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"fmt"
 
 	"github.com/ffsales/20-CleanArch/internal/entity"
 )
@@ -33,4 +34,24 @@ func (r *OrderRepository) GetTotal() (int, error) {
 		return 0, err
 	}
 	return total, nil
+}
+
+func (r *OrderRepository) ListOrders() ([]entity.Order, error) {
+	rows, err := r.Db.Query("SELECT id, price, tax, final_price FROM orders")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	orders := []entity.Order{}
+	for rows.Next() {
+		var id string
+		var price, tax, finalPrice float64
+		if err = rows.Scan(&id, &price, &tax, &finalPrice); err != nil {
+			return nil, err
+		}
+		orders = append(orders, entity.Order{ID: id, Price: price, Tax: tax, FinalPrice: finalPrice})
+		fmt.Println(id)
+	}
+	return orders, nil
 }

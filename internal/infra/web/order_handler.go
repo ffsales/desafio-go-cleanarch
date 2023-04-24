@@ -2,6 +2,7 @@ package web
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/ffsales/20-CleanArch/internal/entity"
@@ -46,4 +47,20 @@ func (h *WebOrderHandler) Create(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+}
+
+func (h *WebOrderHandler) ListOrders(w http.ResponseWriter, r *http.Request) {
+
+	// var dtos []usecase.OrderInputDTO
+	_, err := h.OrderRepository.ListOrders()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	fmt.Println("ListOrders")
+	// for order, _ := range orders {
+	// 	err = json.NewEncoder(w).Encode(output)
+	// 	fmt.Println(order.ID)
+	// }
 }

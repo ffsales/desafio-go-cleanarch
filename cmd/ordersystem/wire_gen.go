@@ -17,6 +17,10 @@ import (
 	"github.com/google/wire"
 )
 
+import (
+	_ "github.com/go-sql-driver/mysql"
+)
+
 // Injectors from wire.go:
 
 func NewCreateOrderUseCase(db *sql.DB, eventDispatcher events.EventDispatcherInterface) *usecase.CreateOrderUseCase {
@@ -40,3 +44,5 @@ var setOrderRepositoryDependency = wire.NewSet(database.NewOrderRepository, wire
 var setEventDispatcherDependency = wire.NewSet(events.NewEventDispatcher, event.NewOrderCreated, wire.Bind(new(events.EventInterface), new(*event.OrderCreated)), wire.Bind(new(events.EventDispatcherInterface), new(*events.EventDispatcher)))
 
 var setOrderCreatedEvent = wire.NewSet(event.NewOrderCreated, wire.Bind(new(events.EventInterface), new(*event.OrderCreated)))
+
+var setOrderListedEvent = wire.NewSet(event.NewOrderListed, wire.Bind(new(events.EventInterface), new(*event.OrderListed)))

@@ -2,24 +2,23 @@ package usecase
 
 import (
 	"github.com/ffsales/20-CleanArch/internal/entity"
-	"github.com/ffsales/20-CleanArch/pkg/events"
 )
 
 type ListOrdersUseCase struct {
 	OrderRepository entity.OrderRepositoryInterface
-	OrderListed     events.EventInterface
-	EventDispatcher events.EventDispatcherInterface
+	// OrderListed     events.EventInterface
+	// EventDispatcher events.EventDispatcherInterface
 }
 
 func NewListOrdersUseCase(
 	OrderRepository entity.OrderRepositoryInterface,
-	OrderListed events.EventInterface,
-	EventDispatcher events.EventDispatcherInterface,
+	// OrderListed events.EventInterface,
+	// EventDispatcher events.EventDispatcherInterface,
 ) *ListOrdersUseCase {
 	return &ListOrdersUseCase{
 		OrderRepository: OrderRepository,
-		OrderListed:     OrderListed,
-		EventDispatcher: EventDispatcher,
+		// OrderListed:     OrderListed,
+		// EventDispatcher: EventDispatcher,
 	}
 }
 

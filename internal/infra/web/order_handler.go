@@ -52,7 +52,7 @@ func (h *WebOrderHandler) Create(w http.ResponseWriter, r *http.Request) {
 
 func (h *WebOrderHandler) ListOrders(w http.ResponseWriter, r *http.Request) {
 
-	listOrders := usecase.NewListOrdersUseCase(h.OrderRepository, h.OrderListedEvent, h.EventDispatcher)
+	listOrders := usecase.NewListOrdersUseCase(h.OrderRepository /*, h.OrderListedEvent, h.EventDispatcher*/)
 
 	outputDtos, err := listOrders.Execute()
 
